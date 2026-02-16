@@ -1,10 +1,7 @@
 package com.jorge.springboot.app.springboot_crud.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,7 +23,7 @@ public class Product {
     @NotNull
     private Integer price;
 
-    @NotEmpty
+    @NotBlank
     private String description;
 
 }
