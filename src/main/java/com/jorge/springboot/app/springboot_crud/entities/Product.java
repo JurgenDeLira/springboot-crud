@@ -1,5 +1,6 @@
 package com.jorge.springboot.app.springboot_crud.entities;
 
+import com.jorge.springboot.app.springboot_crud.validation.IsExistsDb;
 import com.jorge.springboot.app.springboot_crud.validation.IsRequired;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -15,6 +16,10 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @IsRequired
+    @IsExistsDb
+    private String sku;
 
     @IsRequired(message = "{IsRequired.product.name}")
     @Size(min=3, max = 20)
