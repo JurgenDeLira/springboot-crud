@@ -37,15 +37,17 @@ public class User {
     )
     private List<Role> roles;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 
     private boolean enabled;
+
+    @Transient
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private boolean admin;
 
     @PrePersist
     public void prePersist() {
         enabled = true;
     }
 
-    @Transient
-    private boolean admin;
+
 }
