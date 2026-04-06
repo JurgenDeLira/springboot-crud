@@ -1,6 +1,8 @@
 package com.jorge.springboot.app.springboot_crud.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,8 +18,11 @@ public class User {
     private Long id;
 
     @Column (unique = true)
+    @NotBlank
+    @Size(min = 4, max = 12)
     private String username;
 
+    @NotBlank
     private String password;
 
     @ManyToMany
