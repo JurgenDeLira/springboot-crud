@@ -1,5 +1,7 @@
 package com.jorge.springboot.app.springboot_crud.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -23,6 +25,7 @@ public class User {
     private String username;
 
     @NotBlank
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @ManyToMany
@@ -33,6 +36,15 @@ public class User {
             uniqueConstraints = { @UniqueConstraint(columnNames = {"user_id", "role_id"})}
     )
     private List<Role> roles;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
+    private boolean enabled;
+
+    @PrePersist
+    public void prePersist() {
+        enabled = true;
+    }
 
     @Transient
     private boolean admin;
