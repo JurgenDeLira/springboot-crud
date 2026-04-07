@@ -3,6 +3,7 @@ package com.jorge.springboot.app.springboot_crud.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jorge.springboot.app.springboot_crud.validation.ExistsByUserName;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -21,9 +22,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (unique = true)
+    @ExistsByUserName
     @NotBlank
     @Size(min = 4, max = 12)
+    @Column (unique = true)
     private String username;
 
     @NotBlank
