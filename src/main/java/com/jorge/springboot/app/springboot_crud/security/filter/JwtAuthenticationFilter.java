@@ -73,8 +73,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String username = user.getUsername();
         Collection<? extends GrantedAuthority> roles = authResult.getAuthorities();
 
-        Claims claims = Jwts.claims().build();
-        claims.put("authorities", roles);
+        Claims claims = Jwts.claims()
+                .add("authorities", roles)
+                .add("username", username)
+                .build();
 
         String token = Jwts.builder()
                 .subject(username)
@@ -92,7 +94,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         body.put("message", String.format("Hola %s has iniciado sesión con éxito!", username));
 
         response.getWriter().write(new ObjectMapper().writeValueAsString(body));
-        response.setContentType();
+        response.setContentType(CONTENT_TYPE);
         response.setStatus(200);
     }
 
